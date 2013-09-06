@@ -1,0 +1,5 @@
+name = TOA_B2C 
+description = "First TOA search module"
+core = 7.x
+files[] = toa_b2c.module
+package = TOA Search
