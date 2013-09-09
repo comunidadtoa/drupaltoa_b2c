@@ -16,7 +16,12 @@ function toa_b2c_menu(){
  * Implements hook_block_info().
  */
 function toa_b2c_block_info(){
-
+  $blocks = array();
+  $blocks['toa_search'] = array(
+    'info' => t('TOA Search'),
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  return $blocks;
 }
 
 /**
@@ -30,7 +35,40 @@ function toa_b2c_block_configure($delta = ''){
  * Implements hook_block_view().
  */
 function toa_b2c_block_view($delta = ''){
-
+  $block = array();
+  switch ($delta) {
+    case 'toa_search':
+      $block['subject'] = t('Buscador TOA');
+      $block['content'] = theme('toa_b2c_search_content_block');
+    break;
+  }
+  return $block;
 }
 
+/**
+ * Implements hook_theme().
+ */
+function toa_b2c_theme($existing, $type, $theme, $path){
+  $theme = array(
+    'toa_b2c_search_content_block' => array(
+      'type'=>'module',
+    ),
+  );
+  return $theme;
+}
 
+/**
+ * Implements theme_toa_b2c_search_content_block().
+ */
+function theme_toa_b2c_search_content_block(){
+  // Add external js libraries necessary
+  drupal_add_js('http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js', 'external');
+  drupal_add_js('http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js', 'external');
+  drupal_add_js('http://cmsmagnolia.hotetec.com/portal-resources/js/jquery.hotetec.utilities.js', 'external');
+  drupal_add_js('http://cmsmagnolia.hotetec.com/portal-resources/js/white/utils/jquery.hotetec.jsonp-processor.js', 'external');
+  drupal_add_js('http://cmsmagnolia.hotetec.com/portal-resources/js/white/finder/jquery.hotetec.white-searcher.js', 'external');
+  // Add js necessary for the search block.
+  drupal_add_js(drupal_get_path('module', 'toa_b2c').'/js/toa_b2c_search_block.js');
+
+  return '<div id="searcher"></div>';
+}
