@@ -1,0 +1,36 @@
+<?php
+
+/*
+ * @file
+ * TOA container module
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function toa_b2c_menu(){
+
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function toa_b2c_block_info(){
+
+}
+
+/**
+ * Implements hook_block_configure().
+ */
+function toa_b2c_block_configure($delta = ''){
+		
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function toa_b2c_block_view($delta = ''){
+
+}
+
+
